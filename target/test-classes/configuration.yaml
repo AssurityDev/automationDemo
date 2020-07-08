@@ -1,0 +1,24 @@
+configurations:
+  executionEnvironment: xxxx
+  coverage: false
+  frameworkDashboard: xxxx
+userManagement:
+  tenant:
+    user:
+      - userName: xxxx
+        password: xxxx
+        roles: xxx,dfdf,dfdf
+        _key: user1
+      - userName: xxxx
+        password: xxxx
+        roles: xxx,fdfdf,dfff
+        _key: user2
+    _domain: super
+    _key: superTenant
+endpointManagement:
+  endpoint:
+    endpointType: http
+    host: localhost
+    port: 8083
+    _key: default
+
