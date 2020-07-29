@@ -1,24 +1,72 @@
 configurations:
-  executionEnvironment: xxxx
+  executionEnvironment: integration
   coverage: false
-  frameworkDashboard: xxxx
+  frameworkDashboard: true
 userManagement:
-  tenant:
-    user:
-      - userName: xxxx
-        password: xxxx
-        roles: xxx,dfdf,dfdf
-        _key: user1
-      - userName: xxxx
-        password: xxxx
-        roles: xxx,fdfdf,dfff
-        _key: user2
-    _domain: super
-    _key: superTenant
+  - tenant:
+      - _key: superTenanat
+      - domain: super
+      - user:
+          _key: user1
+          userName: admin
+          password: admin
+          roles: admin,dev,test,dfdf
+      - user:
+          _key: user2
+          userName: testuser1
+          password: test123
+          roles: dev,test,dfdf
+  - tenant:
+      - _key: adminTenanat
+      - domain: admin
+      - user:
+          _key: user1
+          userName: admin
+          password: admin
+          roles: admin,dev,test,dfdf
+      - user:
+          _key: user2
+          userName: testuser1
+          password: test123
+          roles: dev,test,dfdf
 endpointManagement:
-  endpoint:
-    endpointType: http
-    host: localhost
-    port: 8083
-    _key: default
-
+  - endpoint:
+      _key: default
+      endpointType: http
+      host: localhost
+      port: 8083
+  - endpoint:
+      _key: default2
+      endpointType: http
+      host: localhost
+      port: 8083
+integrationManagement:
+  - integration:
+      _key: dashboard
+      endpoint: "http://localhost:8080"
+      uuid: '731918a4-da59-49ce-89e8-9d3ac44599d0'
+      launch: 'superadmin_TEST_EXAMPLE'
+      project: 'superadmin_personal'
+  - integration:
+      _key: testcaseman
+      endpoint: 'localhost8080'
+      uuid: '731918a4-da59-49ce-89e8-9d3ac44599d0'
+      launch: 'superadmin_TEST_EXAMPLE'
+      project: 'superadmin_personal'
+datamapperManagement:
+  dataSources:
+    - datasource:
+      name: mysqlds
+      connectionParameters:
+        url: jdbc:mysql://db.mysql-wso2.com:3306/apimgtdb?autoReconnect=true
+        username: user
+        password: password
+  dataMappings:
+    - datapapping:
+      mappertag: assurity.testng.dataprovider
+      datasource: mysqlds
+      database: employee
+      mapperQuerry: select name, id from Employee
+      mapping:
+        - map: name -> tsname
+        - map: id -> tsid

@@ -1,6 +1,7 @@
 package com.assurity.automation.demo.tests;
 
 import com.assurity.automation.engine.FrameworkContext;
+import com.assurity.automation.engine.context.TestContext;
 import com.assurity.automation.engine.dataprovider.TestNgDataProvider;
 import com.assurity.automation.utilities.FrameworkBaseTest;
 import com.assurity.automation.utilities.rest.GenericRestClient;
@@ -15,9 +16,8 @@ public class EmployeeServiceTest extends FrameworkBaseTest {
     GenericRestClient genericRestClient;
     @BeforeTest
     public void initTest() throws URISyntaxException {
-        FrameworkContext context = new FrameworkContext();
-        context.build();
-        String endpoint = context.getEndpoint();
+        TestContext context = new TestContext();
+        String endpoint = context.getDefaultEndpoint();
         genericRestClient = new GenericRestClient(endpoint);
     }
 
@@ -46,12 +46,12 @@ public class EmployeeServiceTest extends FrameworkBaseTest {
         genericRestClient.doPost("/employees/adduser/",employee);
 
     }
-
     @Test
     public void getEmployeeTestcase()
     {
         Object response  = genericRestClient.doGetRequest( "/employees/getuser/");
         response.toString();
+        Assert.notNull(response, "List is empty, Employee not added");
     }
 
     private Object getResponse()
